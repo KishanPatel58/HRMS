@@ -2,10 +2,6 @@ const express = require("express");
 const router = express.Router();
 const User = require("../models/User");
 
-// LOGIN PAGE as "/"
-router.get("/", (req, res) => {
-  res.render("auth/login");
-});
 
 // LOGIN SUBMIT
 router.post("/user/login", async (req, res) => {
@@ -17,7 +13,7 @@ router.post("/user/login", async (req, res) => {
   req.session.user = user;
 
   user.role === "admin"
-    ? res.render("/dashboard/admin",{user})
+    ? res.redirect("/dashboard/admin")
     : res.redirect("/dashboard/employee");
 });
 

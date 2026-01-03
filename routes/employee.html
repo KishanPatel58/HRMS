@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dayflow HRMS – Admin Panel</title>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+
+<style>
+body{font-family:'Segoe UI',sans-serif;background:#f1f5f9}
+
+/* LOGIN */
+.login-page{
+  min-height:100vh;display:flex;align-items:center;justify-content:center;
+  background:linear-gradient(120deg,rgba(15,23,42,.9),rgba(2,6,23,.95)),
+  url('https://images.unsplash.com/photo-1517248135467-4c7edcad34c4') center/cover;
+}
+.login-card{width:420px;border-radius:1.5rem;background:#fff;box-shadow:0 25px 60px rgba(0,0,0,.35)}
+
+/* NAVBAR */
+.navbar-custom{background:linear-gradient(90deg,#0f172a,#020617)}
+.navbar-custom .nav-link{color:#e5e7eb!important}
+
+/* HERO */
+.hero{min-height:90vh;position:relative}
+.hero::after{content:'';position:absolute;inset:0;background:rgba(0,0,0,.6);z-index:1}
+.hero-content{
+  position:absolute;z-index:2;color:white;inset:0;
+  display:flex;align-items:center;justify-content:center;flex-direction:column
+}
+
+/* COMMON */
+.page-header{background:linear-gradient(120deg,#020617,#0f172a);color:white;padding:3rem;text-align:center}
+.hrms-card{border:none;border-radius:1.25rem;box-shadow:0 15px 35px rgba(0,0,0,.1)}
+
+/* DASHBOARD CARDS */
+.dashboard-card{
+  background:white;border-radius:14px;padding:25px;text-align:center;
+  cursor:pointer;transition:.3s;
+  box-shadow:0 10px 25px rgba(0,0,0,.15);
+}
+.dashboard-card h6{color:#6b7280}
+.dashboard-card h2{font-weight:700;color:#0f172a}
+.dashboard-card:hover{transform:translateY(-8px);box-shadow:0 18px 40px rgba(0,0,0,.25)}
+
+/* PROFILE */
+.profile-upload .camera-icon{
+  position:absolute;bottom:10px;right:10px;
+  width:42px;height:42px;background:#0d6efd;color:white;
+  border-radius:50%;display:flex;align-items:center;justify-content:center;
+}
+</style>
+</head>
+<body>
+
+<!-- LOGIN -->
+<div class="login-page" id="loginPage">
+<div class="card login-card p-4">
+<h4 class="text-center fw-bold mb-3">Admin Login</h4>
+<input id="username" class="form-control mb-3" placeholder="Username">
+<input id="password" type="password" class="form-control mb-3" placeholder="Password">
+<button class="btn btn-primary w-100" onclick="login()">Login</button>
+</div>
+</div>
+
+<!-- APP -->
+<div id="adminApp" style="display:none">
+
+<!-- NAVBAR -->
+<nav class="navbar navbar-expand-lg navbar-custom fixed-top">
+<div class="container-fluid">
+<button class="btn btn-outline-light" data-bs-toggle="offcanvas" data-bs-target="#sidebar">
+<i class="bi bi-list"></i>
+</button>
+<span class="navbar-brand text-white fw-bold ms-2">Dayflow HRMS</span>
+<ul class="navbar-nav ms-auto">
+<li class="nav-item">
+<button class="btn btn-sm btn-outline-light" onclick="logout()">
+<i class="bi bi-box-arrow-right"></i>
+</button>
+</li>
+</ul>
+</div>
+</nav>
+
+<!-- SIDEBAR -->
+<div class="offcanvas offcanvas-start" id="sidebar">
+<div class="offcanvas-header">
+<h5>Admin Panel</h5>
+<button class="btn-close" data-bs-dismiss="offcanvas"></button>
+</div>
+<ul class="list-group list-group-flush">
+<li class="list-group-item" onclick="showPage('dashboard')" data-bs-dismiss="offcanvas">Dashboard</li>
+<li class="list-group-item" onclick="showPage('attendance')" data-bs-dismiss="offcanvas">Attendance</li>
+<li class="list-group-item" onclick="showPage('leave')" data-bs-dismiss="offcanvas">Leave Requests</li>
+<li class="list-group-item" onclick="showPage('payroll')" data-bs-dismiss="offcanvas">Payroll</li>
+<li class="list-group-item" data-bs-toggle="modal" data-bs-target="#adminProfileModal">Profile</li>
+<li class="list-group-item text-danger" onclick="logout()">Logout</li>
+</ul>
+</div>
+
+<!-- DASHBOARD -->
+<div id="dashboardPage">
+<div class="hero">
+
+<div id="itCarousel" class="carousel slide h-100" data-bs-ride="carousel">
+<div class="carousel-indicators">
+<button data-bs-target="#itCarousel" data-bs-slide-to="0" class="active"></button>
+<button data-bs-target="#itCarousel" data-bs-slide-to="1"></button>
+<button data-bs-target="#itCarousel" data-bs-slide-to="2"></button>
+</div>
+
+<div class="carousel-inner h-100">
+<div class="carousel-item active h-100">
+<img src="https://images.unsplash.com/photo-1531973576160-7125cd663d86" class="d-block w-100 h-100 object-fit-cover">
+</div>
+<div class="carousel-item h-100">
+<img src="https://images.unsplash.com/photo-1519389950473-47ba0277781c" class="d-block w-100 h-100 object-fit-cover">
+</div>
+<div class="carousel-item h-100">
+<img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085" class="d-block w-100 h-100 object-fit-cover">
+</div>
+</div>
+</div>
+
+<div class="hero-content text-center">
+<h1>Admin Dashboard</h1>
+<p>Human Resource Management System</p>
+
+<div class="container mt-5">
+<div class="row g-4 justify-content-center">
+<div class="col-md-3"><div class="dashboard-card" onclick="showPage('attendance')"><h6>Total Employees</h6><h2>25</h2></div></div>
+<div class="col-md-3"><div class="dashboard-card" onclick="showPage('attendance')"><h6>Present Today</h6><h2>22</h2></div></div>
+<div class="col-md-3"><div class="dashboard-card" onclick="showPage('leave')"><h6>Pending Leaves</h6><h2>3</h2></div></div>
+<div class="col-md-3"><div class="dashboard-card" onclick="showPage('payroll')"><h6>Payroll Month</h6><h2>June</h2></div></div>
+</div>
+</div>
+
+</div>
+</div>
+</div>
+
+<!-- ATTENDANCE -->
+<div id="attendancePage" style="display:none;margin-top:80px">
+<div class="page-header"><h2>Attendance Management</h2></div>
+<div class="container my-4">
+<div class="card hrms-card p-4">
+<table class="table">
+<thead><tr><th>Employee</th><th>ID</th><th>Status</th></tr></thead>
+<tbody>
+<tr>
+<td>John Doe</td>
+<td>EMP101</td>
+<td>
+<select class="form-select form-select-sm w-50">
+<option>Present</option>
+<option>Absent</option>
+<option>Half-day</option>
+<option>Leave</option>
+</select>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+
+<!-- LEAVE -->
+<div id="leavePage" style="display:none;margin-top:80px">
+<div class="page-header"><h2>Leave Requests</h2></div>
+<div class="container my-4">
+<div class="card hrms-card p-4">
+<table class="table">
+<thead><tr><th>Employee</th><th>Type</th><th>Days</th><th>Status</th><th>Action</th></tr></thead>
+<tbody>
+<tr>
+<td>John Doe</td><td>Paid</td><td>3</td>
+<td><span class="badge bg-warning">Pending</span></td>
+<td>
+<button class="btn btn-sm btn-success">Approve</button>
+<button class="btn btn-sm btn-danger">Reject</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+
+<!-- PAYROLL -->
+<div id="payrollPage" style="display:none;margin-top:80px">
+<div class="page-header"><h2>Payroll Management</h2></div>
+<div class="container my-4">
+<div class="card hrms-card p-4">
+<table class="table">
+<thead><tr><th>Employee</th><th>ID</th><th>Salary</th></tr></thead>
+<tbody>
+<tr><td>John Doe</td><td>EMP101</td><td>₹45,000</td></tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+
+</div>
+
+<!-- PROFILE MODAL -->
+<div class="modal fade" id="adminProfileModal">
+<div class="modal-dialog modal-lg modal-dialog-centered">
+<div class="modal-content rounded-4">
+<div class="modal-body p-5">
+<h3 class="fw-bold mb-4">Admin Profile</h3>
+<div class="row align-items-center g-4">
+<div class="col-md-4 text-center">
+<label class="profile-upload position-relative d-inline-block">
+<img id="adminPhoto" src="https://via.placeholder.com/200"
+class="rounded-circle border border-4 border-primary"
+style="width:200px;height:200px;object-fit:cover;cursor:pointer">
+<span class="camera-icon"><i class="bi bi-camera-fill"></i></span>
+<input type="file" id="photoUpload" hidden>
+</label>
+</div>
+<div class="col-md-8 fs-5">
+<p><strong>Name:</strong> <span id="adminName"></span></p>
+<p><strong>Admin ID:</strong> <span id="adminId"></span></p>
+<p><strong>Email:</strong> <span id="adminEmail"></span></p>
+<p><strong>Department:</strong> Human Resources</p>
+<p><strong>Role:</strong> System Administrator</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+<script>
+const ADMIN_USER="admin",ADMIN_PASS="admin123";
+
+function login(){
+ if(username.value===ADMIN_USER && password.value===ADMIN_PASS){
+  loginPage.style.display="none";
+  adminApp.style.display="block";
+  setAdminProfile(username.value);
+ } else alert("Invalid Credentials");
+}
+
+function logout(){location.reload()}
+
+function showPage(p){
+ dashboardPage.style.display=p==="dashboard"?"block":"none";
+ attendancePage.style.display=p==="attendance"?"block":"none";
+ leavePage.style.display=p==="leave"?"block":"none";
+ payrollPage.style.display=p==="payroll"?"block":"none";
+}
+
+function setAdminProfile(user){
+ adminName.innerText=user;
+ adminId.innerText="ADM"+Math.floor(1000+Math.random()*9000);
+ adminEmail.innerText=user+"@dayflow.com";
+ const saved=localStorage.getItem("adminPhoto");
+ if(saved) adminPhoto.src=saved;
+}
+
+photoUpload.addEventListener("change",e=>{
+ const file=e.target.files[0];
+ if(file){
+  const r=new FileReader();
+  r.onload=()=>{adminPhoto.src=r.result;localStorage.setItem("adminPhoto",r.result)};
+  r.readAsDataURL(file);
+ }
+});
+</script>
+</body>
+</html>
