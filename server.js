@@ -86,14 +86,17 @@ app.get("/dashboard/employee", (req, res) => {
 // ------------------ PAYROLL ------------------
 app.get("/employee/payroll", async (req, res) => {
   try {
-    const payroll = await Payroll.find(); // later filter by employeeId
+    // fetch all payroll records
+    const payroll = await Payroll.find()
+      .populate("employeeId", "name"); // optional but recommended
+
     res.render("payroll/view", { payroll });
-    console.log(payroll);
   } catch (err) {
     console.log(err);
-    res.send("Error fetching payroll");
+    res.send("Error fetching payroll data");
   }
 });
+
 
 // ------------------ SERVER ------------------
 const PORT = process.env.PORT || 5000;
