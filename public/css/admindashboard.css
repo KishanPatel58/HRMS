@@ -1,0 +1,42 @@
+/* ================= NAVBAR ================= */
+.navbar-custom {
+  background: linear-gradient(90deg,#0f172a,#020617);
+  padding: 1rem 2rem;
+}
+.navbar-custom .nav-link {
+  color:#e5e7eb !important;
+  margin-left:1.25rem;
+}
+.navbar-custom .nav-link:hover {
+  color:white !important;
+}
+
+/* ================= CAROUSEL ================= */
+.hero-carousel .carousel-item {
+  min-height: 90vh;
+}
+.hero-carousel img {
+  height:100%;
+  object-fit:cover;
+  filter:brightness(55%);
+}
+.hero-content {
+  position:absolute;
+  inset:0;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  color:white;
+  text-align:center;
+}
+
+/* ================= DASHBOARD ================= */
+.dashboard {
+  margin-top:-7rem;
+}
+.stat-card {
+  border:none;
+  border-radius:1.25rem;
+  box-shadow:0 15px 30px rgba(0,0,0,.08);
+}

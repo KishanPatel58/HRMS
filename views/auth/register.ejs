@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <link rel="stylesheet" href="/css/login.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+        crossorigin="anonymous"></script>
+    <title>Login</title>
+</head>
+
+<body>
+    <div class="login-page" id="loginPage">
+        <form class="card login-card shadow-lg p-4" action="/employee/auth/register" method="post">
+            <h4 class="text-center fw-bold">Register</h4>
+            <label for="username" class="input-label">Employee Name</label>
+            <input id="username" class="form-control mb-3" placeholder="Employee Name" name="userregister" required>
+            <label for="select-department" class="input-label">Employee Department</label>
+            <select name="department" id="select-department" class="form-control mb-3" required>
+                <option value="manager">Manager</option>
+                <option value="finance">Finance</option>
+                <option value="hr">HR</option>
+                <option value="it">IT</option>
+                <option value="marketing">Marketing</option>
+            </select>
+            <label for="designation" class="input-label">Employee Designation</label>
+            <input id="designation" type="text" class="form-control mb-3" name="designation" placeholder="Employee Designation" required>
+            <label for="mobile" class="input-label">Employee Mobilenumber</label>
+            <input id="mobile" type="number" class="form-control mb-3" name="mobilenumber" placeholder="Employee Mobile No."
+                required>
+            <label for="em" class="input-label">Employee Email</label>
+            <input id="em" type="email" class="form-control mb-3" name="email" placeholder="Employee Email" required>
+            <label for="address" class="input-label">Employee Address</label>
+            <textarea id="address" name="address" id="" class="form-control mb-3" placeholder="Employee Address" required></textarea>
+            <label for="password" class="input-label">Employee Password</label>
+            <input id="password" class="form-control mb-3" type="password" placeholder="Employee Password"
+                name="passwordregister" required>
+
+            <button class="btn btn-primary w-100" type="submit">Add Employee</button>
+        </form>
+        <!-- userId: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
+  name: String,
+  department: String,
+  designation: String,
+  phone: String,
+  email: String,
+  address: String -->
+    </div>
+</body>
+
+</html>
