@@ -259,26 +259,8 @@
 </head>
 
 <body>
-
-    <!-- LOGIN -->
-    <div class="center" id="loginPage">
-        <div class="card">
-            <h2>Employee Login</h2>
-            <div class="form-group">
-                <label>Email</label>
-                <input id="email" type="email" />
-            </div>
-            <div class="form-group">
-                <label>Password</label>
-                <input id="password" type="password" />
-            </div>
-            <button style="width:100%" onclick="login()">Login</button>
-            <div class="error" id="errorMsg"></div>
-        </div>
-    </div>
-
     <!-- DASHBOARD -->
-    <div id="dashboardPage" style="display:none;">
+    <div id="dashboardPage">
 
         <header>
             <div style="display:flex;align-items:center;gap:12px;">
@@ -312,13 +294,12 @@
                 </video>
                 <div class="hero-overlay">
                     <h2>Welcome to Dayflow HRMS</h2>
-                    <p>Manage your profile, attendance, leave & salary in one place</p>
                 </div>
             </div>
 
             <!-- PROFILE -->
             <div class="info-card slide" style="display:block;">
-                <h3>Personal Profile</h3>
+                <h3 align="center">Personal Profile</h3>
 
                 <div class="profile-vertical">
                     <img id="profilePreview" src="https://i.pravatar.cc/300?img=12" class="profile-rect" />
@@ -472,15 +453,15 @@
     <script>
         const demoUser = { email: 'employee@dayflow.com', password: '123456' };
 
-        function login() {
-            if (email.value === demoUser.email && password.value === demoUser.password) {
-                loginPage.style.display = 'none';
-                dashboardPage.style.display = 'block';
-                errorMsg.textContent = '';
-            } else {
-                errorMsg.textContent = 'Invalid login';
-            }
-        }
+        // function login() {
+        //     if (email.value === demoUser.email && password.value === demoUser.password) {
+        //         loginPage.style.display = 'none';
+        //         dashboardPage.style.display = 'block';
+        //         errorMsg.textContent = '';
+        //     } else {
+        //         errorMsg.textContent = 'Invalid login';
+        //     }
+        // }
 
         function logout() {
             dashboardPage.style.display = 'none';
