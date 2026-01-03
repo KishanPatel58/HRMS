@@ -17,7 +17,7 @@ router.post("/user/login", async (req, res) => {
   req.session.user = user;
 
   user.role === "admin"
-    ? res.redirect("/dashboard/admin")
+    ? res.render("/dashboard/admin",{user})
     : res.redirect("/dashboard/employee");
 });
 
