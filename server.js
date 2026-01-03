@@ -60,5 +60,8 @@ app.post("/employee/auth/register", async (req, res) => {
 app.get("/admin/dashboard", (req, res) => {
     res.render("dashboard/admin")
 })
+app.get("/dashboard/employee", (req, res) => {
+    res.render("dashboard/employee")
+})
 
 app.listen(process.env.PORT || 5000, () => console.log(`Server is Running at PORT : ${process.env.PORT}`));
